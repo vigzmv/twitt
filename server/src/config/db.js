@@ -7,11 +7,11 @@ mongoose.set('debug', true);
 
 try {
   mongoose.connect(constants.DB_URL, {
-    useMongoClient: true
+    // useMongoClient: true,
   });
 } catch (err) {
   mongoose.createConnection(constants.DB_URL, {
-    useMongoClient: true
+    // useMongoClient: true,
   });
 }
 
@@ -19,6 +19,6 @@ mongoose.connection
   .once('open', () => {
     console.log('MongoDB connected');
   })
-  .on('error', (e) => {
+  .on('error', e => {
     throw e;
   });

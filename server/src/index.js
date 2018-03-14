@@ -8,6 +8,7 @@ import typeDefs from './graphql/schema';
 import resolvers from './graphql/resolvers';
 import './config/db';
 import constants from './config/constants';
+import mocks from './mocks/';
 
 const app = express();
 
@@ -31,10 +32,12 @@ app.use(
 
 const graphQLServer = createServer(app);
 
-app.listen(constants.PORT, err => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(`Server running on PORT: ${constants.PORT}`);
-  }
+mocks().then(() => {
+  graphQLServer.listen(constants.PORT, err => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(`Server running on PORT: ${constants.PORT}`);
+    }
+  });
 });

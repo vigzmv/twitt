@@ -14,7 +14,9 @@
     "body-parser": "^1.18.2",
     "cross-env": "^5.1.4",
     "express": "^4.16.3",
+    "faker": "^4.1.0",
     "graphql": "^0.13.1",
+    "graphql-date": "^1.0.3",
     "graphql-tools": "^2.22.0",
     "mongoose": "^5.0.10"
   },

@@ -6,7 +6,7 @@ export default {
     const user = await User.create({ firstName, lastName, ...rest });
 
     return {
-      token: user.createToken,
+      token: user.createToken(),
     };
   },
 

@@ -10,6 +10,7 @@ export default {
       throw error;
     }
   },
+
   getTweets: async (_, __, { user }) => {
     try {
       await requireAuth(user);
@@ -18,14 +19,16 @@ export default {
       throw error;
     }
   },
+
   createTweet: async (_, args, { user }) => {
     try {
       await requireAuth(user);
-      return Tweet.create(args);
+      return Tweet.create({ ...args, user: user._id });
     } catch (error) {
       throw error;
     }
   },
+
   updateTweet: async (_, { _id, ...rest }, { user }) => {
     try {
       await requireAuth(user);
@@ -34,6 +37,7 @@ export default {
       throw error;
     }
   },
+
   deleteTweet: async (_, { _id }, { user }) => {
     try {
       await requireAuth(user);

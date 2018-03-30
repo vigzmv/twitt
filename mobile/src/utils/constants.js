@@ -4,4 +4,3 @@ export const colors = {
   WHITE: '#FFFFFF',
   LIGHT_GRAY: '#CAD0D6',
 };
-

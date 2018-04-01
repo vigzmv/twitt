@@ -12,7 +12,8 @@ const Root = styled.View`
   shadow-offset: 0 2px;
   shadow-radius: 2;
   shadow-opacity: 0.1;
-  elevation: 2.6;
+  elevation: 2;
+  margin: 4.4px 0;
 `;
 
 const CardContentContainer = styled.View`
@@ -31,8 +32,8 @@ export default function FeedCard() {
       <FeedCardHeader />
       <CardContentContainer>
         <CardContentText>
-          lorem20 ismpua asd as a fasd ada sd asd as dasdasd asd asd asdasda ea wewe asda afadad
-          adasda
+          An Apple Developer account is needed to build an iOS standalone app, but a Google Play
+          Developer account is not needed to build the Android standalone app.
         </CardContentText>
       </CardContentContainer>
       <FeedCardBottom />

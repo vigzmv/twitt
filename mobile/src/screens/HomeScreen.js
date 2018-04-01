@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
-
+import { StatusBar } from 'react-native';
 import FeedCard from '../components/FeedCard/FeedCard';
 
 const Root = styled.View`
   flex: 1;
-  justify-content: center;
+  padding: 5px;
+  background: #eeeeee;
+  margin-top: ${StatusBar.currentHeight};
+`;
+
+const List = styled.ScrollView`
+  /* background: red; */
 `;
 
 class HomeScreen extends Component {
@@ -13,7 +19,24 @@ class HomeScreen extends Component {
   render() {
     return (
       <Root>
-        <FeedCard />
+        <List>
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+        </List>
       </Root>
     );
   }

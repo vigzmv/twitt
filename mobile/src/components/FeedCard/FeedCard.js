@@ -17,7 +17,7 @@ const Root = styled.View`
 
 const CardContentContainer = styled.View`
   flex: 1;
-  padding: 10px 20px 10px 14px;
+  padding: 10px 24px 10px 16px;
 `;
 
 const CardContentText = styled.Text`

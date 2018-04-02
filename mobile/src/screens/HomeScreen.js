@@ -7,7 +7,6 @@ const Root = styled.View`
   flex: 1;
   padding: 5px;
   background: #eeeeee;
-  margin-top: ${StatusBar.currentHeight};
 `;
 
 const List = styled.ScrollView`

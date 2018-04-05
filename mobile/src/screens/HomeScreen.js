@@ -6,7 +6,6 @@ import FeedCard from '../components/FeedCard/FeedCard';
 const Root = styled.View`
   flex: 1;
   padding: 5px;
-  background: #eeeeee;
 `;
 
 const List = styled.ScrollView`

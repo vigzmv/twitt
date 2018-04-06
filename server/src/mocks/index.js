@@ -3,8 +3,8 @@ import faker from 'faker';
 import Tweet from '../models/Tweet';
 import User from '../models/User';
 
-const TWEETS_TOTAL = 3;
-const USER_TOTAL = 3;
+const TWEETS_TOTAL = 2;
+const USER_TOTAL = 5;
 
 export default async () => {
   try {

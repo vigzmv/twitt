@@ -9,6 +9,7 @@ export default {
   Tweet: {
     user: ({ user }) => User.findById(user),
   },
+
   Query: {
     getTweet: TweetResolver.getTweet,
     getTweets: TweetResolver.getTweets,

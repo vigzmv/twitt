@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { ActivityIndicator, FlatList } from 'react-native';
 import { graphql } from 'react-apollo';
@@ -12,6 +13,10 @@ const Root = styled.View`
 `;
 
 class HomeScreen extends Component {
+  static propTypes = {
+    data: PropTypes.object.isRequired,
+  };
+
   _renderListItem = ({ item }) => <FeedCard {...item} />;
 
   render() {

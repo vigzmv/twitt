@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { distanceInWordsToNow } from 'date-fns';
 
@@ -67,7 +68,7 @@ const MetaBottomContainer = styled.View`
   margin-top: 0.5px;
 `;
 
-export default function FeedCardHeader({ avatar, username, firstName, lastName, createdAt }) {
+function FeedCardHeader({ avatar, username, firstName, lastName, createdAt }) {
   return (
     <Root>
       <AvatarContainer>
@@ -87,3 +88,13 @@ export default function FeedCardHeader({ avatar, username, firstName, lastName, 
     </Root>
   );
 }
+
+FeedCardHeader.propTypes = {
+  avatar: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  firstName: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+};
+
+export default FeedCardHeader;

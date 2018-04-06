@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 
 import FeedCardHeader from './FeedCardHeader';
@@ -27,7 +28,7 @@ const CardContentText = styled.Text`
   color: ${props => props.theme.BLACK_LIGHT};
 `;
 
-export default function FeedCard({ text, user, createdAt, favoriteCount }) {
+function FeedCard({ text, user, createdAt, favoriteCount }) {
   return (
     <Root>
       <FeedCardHeader {...user} createdAt={createdAt} />
@@ -38,3 +39,17 @@ export default function FeedCard({ text, user, createdAt, favoriteCount }) {
     </Root>
   );
 }
+
+FeedCard.propTypes = {
+  text: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    avatar: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+  }).isRequired,
+  createdAt: PropTypes.string.isRequired,
+  favoriteCount: PropTypes.number.isRequired,
+};
+
+export default FeedCard;

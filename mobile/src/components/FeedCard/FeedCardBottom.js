@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { MaterialCommunityIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
 
@@ -25,7 +26,7 @@ const ButtonText = styled.Text`
 
 const isFav = false;
 
-export default function FeedCardBottom({ favoriteCount }) {
+function FeedCardBottom({ favoriteCount }) {
   return (
     <Root>
       <Button>
@@ -47,3 +48,9 @@ export default function FeedCardBottom({ favoriteCount }) {
     </Root>
   );
 }
+
+FeedCardBottom.propTypes = {
+  favoriteCount: PropTypes.number.isRequired,
+};
+
+export default FeedCardBottom;

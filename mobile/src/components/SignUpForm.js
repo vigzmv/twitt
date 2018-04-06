@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { TouchableOpacity, Keyboard } from 'react-native';
 import styled from 'styled-components/native';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -64,6 +65,7 @@ const Input = styled.TextInput.attrs({
   placeholderTextColor: colors.GREY_LIGHT,
   selectionColor: colors.PRIMARY,
   autoCorrect: false,
+  underlineColorAndroid: 'transparent',
 })`
   height: 30;
   width: 100%;
@@ -129,5 +131,9 @@ class SignUpForm extends Component {
     );
   }
 }
+
+SignUpForm.propTypes = {
+  onBackPress: PropTypes.func.isRequired,
+};
 
 export default SignUpForm;

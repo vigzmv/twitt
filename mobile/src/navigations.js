@@ -58,7 +58,7 @@ const Tabs = ReactNavigation.TabNavigator(
       showIcon: true,
       showLabel: false,
       activeTintColor: colors.PRIMARY,
-      inactiveTintColor: colors.LIGHT_GREY,
+      inactiveTintColor: colors.GREY_LIGHT,
       style: {
         backgroundColor: colors.WHITE,
         height: 46,

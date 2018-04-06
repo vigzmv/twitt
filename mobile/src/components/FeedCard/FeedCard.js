@@ -5,7 +5,7 @@ import FeedCardHeader from './FeedCardHeader';
 import FeedCardBottom from './FeedCardBottom';
 
 const Root = styled.View`
-  min-height: 180;
+  min-height: 158;
   background-color: ${props => props.theme.WHITE};
   width: 100%;
   shadow-color: ${props => props.theme.SECONDARY};
@@ -22,21 +22,19 @@ const CardContentContainer = styled.View`
 `;
 
 const CardContentText = styled.Text`
-  font-size: 14;
+  font-size: 14.5;
   text-align: left;
+  color: ${props => props.theme.BLACK_LIGHT};
 `;
 
-export default function FeedCard() {
+export default function FeedCard({ text, user, createdAt, favoriteCount }) {
   return (
     <Root>
-      <FeedCardHeader />
+      <FeedCardHeader {...user} createdAt={createdAt} />
       <CardContentContainer>
-        <CardContentText>
-          An Apple Developer account is needed to build an iOS standalone app, but a Google Play
-          Developer account is not needed to build the Android standalone app.
-        </CardContentText>
+        <CardContentText>{text}</CardContentText>
       </CardContentContainer>
-      <FeedCardBottom />
+      <FeedCardBottom favoriteCount={favoriteCount} />
     </Root>
   );
 }

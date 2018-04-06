@@ -20,29 +20,29 @@ const Button = styled.TouchableOpacity`
 const ButtonText = styled.Text`
   font-size: 16;
   font-weight: 400;
-  color: ${props => props.theme.LIGHT_GREY};
+  color: ${props => props.theme.GREY};
 `;
 
 const isFav = false;
 
-export default function FeedCardBottom() {
+export default function FeedCardBottom({ favoriteCount }) {
   return (
     <Root>
       <Button>
-        <FontAwesome name="comment-o" size={22} color={colors.LIGHT_GREY} />
+        <FontAwesome name="comment-o" size={22} color={colors.GREY} />
         <ButtonText>3</ButtonText>
       </Button>
       <Button>
-        <MaterialCommunityIcons name="twitter-retweet" size={32} color={colors.LIGHT_GREY} />
+        <MaterialCommunityIcons name="twitter-retweet" size={32} color={colors.GREY} />
         <ButtonText>4</ButtonText>
       </Button>
       <Button>
         <Ionicons
           name={isFav ? 'md-heart' : 'md-heart-outline'}
           size={24}
-          color={isFav ? 'red' : colors.LIGHT_GREY}
+          color={isFav ? colors.RED : colors.GREY}
         />
-        <ButtonText>2</ButtonText>
+        <ButtonText>{favoriteCount}</ButtonText>
       </Button>
     </Root>
   );

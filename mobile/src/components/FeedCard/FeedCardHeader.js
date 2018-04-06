@@ -1,17 +1,20 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { distanceInWordsToNow } from 'date-fns';
 
-const AVATAR_SIZE = 44;
+const AVATAR_SIZE = 48;
 const AVATAR_RADIUS = AVATAR_SIZE / 2;
 
 const Root = styled.View`
   height: 50;
   flex-direction: row;
   align-items: center;
+  margin-top: 8px;
+  margin-bottom: 2px;
 `;
 
 const AvatarContainer = styled.View`
-  flex: 0.16;
+  flex: 0.18;
   padding-left: 16px;
   padding-top: 3px;
   justify-content: center;
@@ -22,13 +25,11 @@ const Avatar = styled.Image`
   height: ${AVATAR_SIZE};
   width: ${AVATAR_SIZE};
   border-radius: ${AVATAR_RADIUS};
-  margin-top: 1px;
 `;
 
 const MetaContainer = styled.View`
   flex: 1;
   align-self: stretch;
-  margin-top: 2px;
 `;
 
 const MetaTopContainer = styled.View`
@@ -38,39 +39,49 @@ const MetaTopContainer = styled.View`
   align-self: stretch;
 `;
 
+const MetaFullName = styled.Text`
+  font-size: 16.5;
+  font-weight: bold;
+  color: ${props => props.theme.SECONDARY};
+`;
+
+const MetaTextUsername = styled.Text`
+  font-size: 14.2;
+  font-weight: 500;
+  color: ${props => props.theme.GREY};
+  padding-bottom: 1px;
+`;
+
+const MetaText = styled.Text`
+  font-size: 13.6px;
+  font-weight: 500;
+  color: ${props => props.theme.GREY_LIGHT};
+  padding-bottom: 1px;
+`;
+
 const MetaBottomContainer = styled.View`
   flex: 0.8;
   align-self: stretch;
   align-items: flex-start;
   justify-content: flex-start;
-  margin-top: 1px;
+  margin-top: 0.5px;
 `;
 
-const MetaText = styled.Text`
-  font-size: 14;
-  font-weight: 500;
-  color: ${props => props.theme.LIGHT_GREY};
-`;
-
-const MetaFullName = styled.Text`
-  font-size: 16;
-  font-weight: bold;
-  color: ${props => props.theme.SECONDARY};
-`;
-
-export default function FeedCardHeader() {
+export default function FeedCardHeader({ avatar, username, firstName, lastName, createdAt }) {
   return (
     <Root>
       <AvatarContainer>
-        <Avatar source={{ uri: 'https://avatars1.githubusercontent.com/u/22526593?s=460&v=4' }} />
+        <Avatar source={{ uri: avatar }} />
       </AvatarContainer>
       <MetaContainer>
         <MetaTopContainer>
-          <MetaFullName>Pooja Sahore</MetaFullName>
-          <MetaText style={{ marginLeft: 5 }}>@PoojaSahore</MetaText>
+          <MetaFullName>
+            {firstName} {lastName}
+          </MetaFullName>
+          <MetaTextUsername style={{ marginLeft: 5 }}>@{username}</MetaTextUsername>
         </MetaTopContainer>
         <MetaBottomContainer>
-          <MetaText>One Day ago</MetaText>
+          <MetaText>{distanceInWordsToNow(createdAt)} ago</MetaText>
         </MetaBottomContainer>
       </MetaContainer>
     </Root>

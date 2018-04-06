@@ -11,6 +11,8 @@ import HomeScreen from './screens/HomeScreen';
 import ExploreScreen from './screens/ExploreScreen';
 import NotificationsScreen from './screens/NotificationsScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import AuthScreen from './screens/AuthScreen';
+
 import { colors } from './utils/constants';
 
 const middleware = createReactNavigationReduxMiddleware('root', state => state.nav);
@@ -101,10 +103,18 @@ function AppNavigator(props) {
     addListener,
   });
 
+  if (!props.user.isAuthenticated) {
+    return <AuthScreen />;
+  }
+
   return <AppMainNav navigation={navigation} />;
 }
 
-const mapStateToProps = state => ({ nav: state.nav });
+const mapStateToProps = state => ({
+  nav: state.nav,
+  user: state.user,
+});
+
 export default connect(mapStateToProps)(AppNavigator);
 
 export const router = AppMainNav.router;

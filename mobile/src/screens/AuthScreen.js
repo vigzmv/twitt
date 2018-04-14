@@ -14,10 +14,11 @@ const ButtonSignUpText = styled.Text`
   color: ${props => props.theme.WHITE};
   font-weight: bold;
   font-size: 26;
+  padding-bottom: 4px;
 `;
 
 const ButtonSignUp = styled(TouchableOpacity)`
-  height: 75;
+  height: 68;
   width: 160;
   background-color: ${props => props.theme.RED};
   justify-content: center;

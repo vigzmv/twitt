@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { TouchableOpacity, Keyboard } from 'react-native';
+import { TouchableOpacity, Keyboard, AsyncStorage } from 'react-native';
 import styled from 'styled-components/native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { graphql, compose } from 'react-apollo';
+import { connect } from 'react-redux';
 
 import { colors } from '../utils/constants';
+import SIGNUP_MUTATION from '../graphql/mutations/signup';
+import Loading from '../components/Loading';
+import { login } from '../actions/user';
 
 const RootWrapper = styled.TouchableWithoutFeedback`
   flex: 1;
@@ -80,11 +85,42 @@ class SignUpForm extends Component {
     email: '',
     password: '',
     username: '',
+    loading: false,
   };
 
   _onTextChange = (text, type) => this.setState({ [type]: text });
 
   _onOutSidePress = () => Keyboard.dismiss();
+
+  _validateInput() {
+    // TODO: Validate better
+    const { fullName, email, password, username } = this.state;
+
+    if (!fullName || !email || !password || !username) {
+      return true;
+    }
+    return false;
+  }
+
+  _onSignupPress = async () => {
+    this.setState({ loading: true });
+    const avatar = '';
+
+    const { data } = await this.props.mutate({
+      variables: {
+        ...this.state,
+        avatar,
+      },
+    });
+
+    try {
+      await AsyncStorage.setItem('@twitt', data.signup.token);
+      this.setState({ loading: false });
+      return this.props.login();
+    } catch (error) {
+      throw error;
+    }
+  };
 
   render() {
     return (
@@ -104,6 +140,7 @@ class SignUpForm extends Component {
             <InputWrapper>
               <Input
                 placeholder="Email"
+                autoCapitalize="none"
                 keyboardType="email-address"
                 onChangeText={text => this._onTextChange(text, 'email')}
               />
@@ -123,8 +160,15 @@ class SignUpForm extends Component {
               />
             </InputWrapper>
           </Wrapper>
-          <ButtonConfirm>
-            <ButtonConfirmText>Sign Up</ButtonConfirmText>
+          <ButtonConfirm
+            onPress={this._onSignupPress}
+            disabled={this.state.loading || this._validateInput()}
+          >
+            {this.state.loading ? (
+              <Loading color={colors.SECONDARY} />
+            ) : (
+              <ButtonConfirmText>Sign Up</ButtonConfirmText>
+            )}
           </ButtonConfirm>
         </Root>
       </RootWrapper>
@@ -134,6 +178,7 @@ class SignUpForm extends Component {
 
 SignUpForm.propTypes = {
   onBackPress: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
-export default SignUpForm;
+export default compose(graphql(SIGNUP_MUTATION), connect(undefined, { login }))(SignUpForm);

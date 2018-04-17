@@ -1,6 +1,7 @@
 import React from 'react';
 import * as ReactNavigation from 'react-navigation';
 import { connect } from 'react-redux';
+import { Text } from 'react-native';
 import {
   createReduxBoundAddListener,
   createReactNavigationReduxMiddleware,
@@ -39,7 +40,7 @@ const Tabs = ReactNavigation.TabNavigator(
     Notifications: {
       screen: NotificationsScreen,
       navigationOptions: () => ({
-        headerTitle: 'Notification',
+        headerTitle: 'Notifications',
         tabBarIcon: ({ tintColor }) => <FontAwesome size={20} color={tintColor} name="bell" />,
       }),
     },
@@ -85,11 +86,14 @@ const AppMainNav = ReactNavigation.StackNavigator(
     },
     navigationOptions: {
       headerStyle: {
-        backgroundColor: colors.WHITE,
+        backgroundColor: colors.PRIMARY_DARK,
       },
       headerTitleStyle: {
         fontWeight: 'bold',
-        color: colors.SECONDARY,
+        color: colors.WHITE,
+        alignSelf: 'center',
+        textAlign: 'center',
+        flex: 1,
       },
     },
   },

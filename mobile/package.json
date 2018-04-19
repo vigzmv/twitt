@@ -9,6 +9,7 @@
     "debug": "open 'rndebugger://set-debugger-loc?host=localhost&port=19001'"
   },
   "dependencies": {
+    "@expo/react-native-action-sheet": "^1.0.2",
     "apollo-client": "1.9.0-0",
     "date-fns": "^1.29.0",
     "expo": "^21.0.0",

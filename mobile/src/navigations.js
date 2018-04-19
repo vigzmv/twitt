@@ -1,7 +1,7 @@
 import React from 'react';
 import * as ReactNavigation from 'react-navigation';
 import { connect } from 'react-redux';
-import { Text } from 'react-native';
+import { View } from 'react-native';
 import {
   createReduxBoundAddListener,
   createReactNavigationReduxMiddleware,
@@ -13,6 +13,8 @@ import ExploreScreen from './screens/ExploreScreen';
 import NotificationsScreen from './screens/NotificationsScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import AuthScreen from './screens/AuthScreen';
+
+import HeaderAvatar from './components/HeaderAvatar';
 
 import { colors } from './utils/constants';
 
@@ -60,15 +62,14 @@ const Tabs = ReactNavigation.TabNavigator(
     tabBarOptions: {
       showIcon: true,
       showLabel: false,
-      activeTintColor: colors.PRIMARY,
+      activeTintColor: colors.PRIMARY_LIGHT,
       inactiveTintColor: colors.GREY_LIGHT,
       style: {
         backgroundColor: colors.WHITE,
-        height: 46,
-        // paddingVertical: 5,
+        height: 45,
       },
       indicatorStyle: {
-        backgroundColor: colors.PRIMARY_DARK,
+        backgroundColor: colors.PRIMARY_LIGHTEST,
       },
     },
   },
@@ -78,6 +79,10 @@ const AppMainNav = ReactNavigation.StackNavigator(
   {
     Home: {
       screen: Tabs,
+      navigationOptions: () => ({
+        headerLeft: <HeaderAvatar />,
+        headerRight: <View />, // to center things out
+      }),
     },
   },
   {
@@ -86,7 +91,7 @@ const AppMainNav = ReactNavigation.StackNavigator(
     },
     navigationOptions: {
       headerStyle: {
-        backgroundColor: colors.PRIMARY_DARK,
+        backgroundColor: colors.PRIMARY_LIGHTER,
       },
       headerTitleStyle: {
         fontWeight: 'bold',
@@ -121,4 +126,4 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps)(AppNavigator);
 
-export const router = AppMainNav.router;
+export const { router } = AppMainNav;

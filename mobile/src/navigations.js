@@ -6,15 +6,17 @@ import {
   createReduxBoundAddListener,
   createReactNavigationReduxMiddleware,
 } from 'react-navigation-redux-helpers';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, SimpleLineIcons } from '@expo/vector-icons';
 
 import HomeScreen from './screens/HomeScreen';
 import ExploreScreen from './screens/ExploreScreen';
 import NotificationsScreen from './screens/NotificationsScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import NewTweetScreen from './screens/NewTweetScreen';
 import AuthScreen from './screens/AuthScreen';
 
 import HeaderAvatar from './components/HeaderAvatar';
+import ButtonHeader from './components/ButtonHeader';
 
 import { colors } from './utils/constants';
 
@@ -75,13 +77,36 @@ const Tabs = ReactNavigation.TabNavigator(
   },
 );
 
+const NewTweetModal = ReactNavigation.StackNavigator(
+  {
+    NewTweet: {
+      screen: NewTweetScreen,
+    },
+  },
+  {
+    headerMode: 'none',
+  },
+);
+
 const AppMainNav = ReactNavigation.StackNavigator(
   {
     Home: {
       screen: Tabs,
-      navigationOptions: () => ({
+      navigationOptions: ({ navigation }) => ({
         headerLeft: <HeaderAvatar />,
-        headerRight: <View />, // to center things out
+        headerRight: (
+          <ButtonHeader side="right" onPress={() => navigation.navigate('NewTweet')}>
+            <SimpleLineIcons color={colors.WHITE} size={23} name="pencil" />
+          </ButtonHeader>
+        ),
+      }),
+    },
+    NewTweet: {
+      screen: NewTweetModal,
+      navigationOptions: () => ({
+        headerTitle: 'New Tweet',
+        headerTintColor: colors.WHITE,
+        headerRight: <View />,
       }),
     },
   },
@@ -112,9 +137,9 @@ function AppNavigator(props) {
     addListener,
   });
 
-  if (!props.user.isAuthenticated) {
-    return <AuthScreen />;
-  }
+  // if (!props.user.isAuthenticated) {
+  //   return <AuthScreen />;
+  // }
 
   return <AppMainNav navigation={navigation} />;
 }

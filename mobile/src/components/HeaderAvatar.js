@@ -6,6 +6,7 @@ import { withApollo } from 'react-apollo';
 import { connectActionSheet } from '@expo/react-native-action-sheet';
 
 import Loading from './Loading';
+import ButtonHeader from './ButtonHeader';
 import { logout } from '../actions/user';
 
 const AVATAR_SIZE = 34;
@@ -15,13 +16,6 @@ const Avatar = styled.Image`
   height: ${AVATAR_SIZE};
   width: ${AVATAR_SIZE};
   border-radius: ${AVATAR_RADIUS};
-`;
-
-const Button = styled.TouchableOpacity`
-  margin-left: 14;
-  margin-top: 1;
-  justify-content: center;
-  align-items: center;
 `;
 
 class HeaderAvatar extends Component {
@@ -52,19 +46,19 @@ class HeaderAvatar extends Component {
 
     if (!info)
       return (
-        <Button disabled>
+        <ButtonHeader side="left" disabled>
           <Loading size={28} color="white" />
-        </Button>
+        </ButtonHeader>
       );
 
     return (
-      <Button onPress={this._onOpenActionSheet}>
+      <ButtonHeader side="left" onPress={this._onOpenActionSheet}>
         <Avatar
           source={{
             uri: info.avatar || 'https://avatars1.githubusercontent.com/u/22526593?s=460&v=4',
           }}
         />
-      </Button>
+      </ButtonHeader>
     );
   }
 }

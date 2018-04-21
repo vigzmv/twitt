@@ -64,14 +64,14 @@ const Tabs = ReactNavigation.TabNavigator(
     tabBarOptions: {
       showIcon: true,
       showLabel: false,
-      activeTintColor: colors.PRIMARY_LIGHT,
+      activeTintColor: colors.PRIMARY_LIGHTER,
       inactiveTintColor: colors.GREY_LIGHT,
       style: {
         backgroundColor: colors.WHITE,
         height: 45,
       },
       indicatorStyle: {
-        backgroundColor: colors.PRIMARY_LIGHTEST,
+        backgroundColor: colors.PRIMARY_LIGHTER,
       },
     },
   },
@@ -116,7 +116,7 @@ const AppMainNav = ReactNavigation.StackNavigator(
     },
     navigationOptions: {
       headerStyle: {
-        backgroundColor: colors.PRIMARY_LIGHTER,
+        backgroundColor: colors.PRIMARY_LIGHT,
       },
       headerTitleStyle: {
         fontWeight: 'bold',

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { distanceInWordsToNow } from 'date-fns';
 
-const AVATAR_SIZE = 48;
+const AVATAR_SIZE = 46;
 const AVATAR_RADIUS = AVATAR_SIZE / 2;
 
 const Root = styled.View`
@@ -72,7 +72,9 @@ function FeedCardHeader({ avatar, username, firstName, lastName, createdAt }) {
   return (
     <Root>
       <AvatarContainer>
-        <Avatar source={{ uri: avatar }} />
+        <Avatar
+          source={{ uri: avatar || 'https://avatars1.githubusercontent.com/u/22526593?s=460&v=4' }}
+        />
       </AvatarContainer>
       <MetaContainer>
         <MetaTopContainer>

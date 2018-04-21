@@ -3,7 +3,6 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import thunk from 'redux-thunk';
-import { createLogger } from 'redux-logger';
 
 import reducers from './reducers';
 
@@ -36,7 +35,12 @@ export const client = new ApolloClient({
   networkInterface,
 });
 
-const middlewares = [client.middleware(), thunk, createLogger()];
+const middlewares = [client.middleware(), thunk];
+
+if (__DEV__) {
+  const { createLogger } = require('redux-logger');
+  middlewares.push(createLogger());
+}
 
 export const store = createStore(
   reducers(client),

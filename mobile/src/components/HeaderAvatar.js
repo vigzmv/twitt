@@ -9,7 +9,7 @@ import Loading from './Loading';
 import ButtonHeader from './ButtonHeader';
 import { logout } from '../actions/user';
 
-const AVATAR_SIZE = 34;
+const AVATAR_SIZE = 35;
 const AVATAR_RADIUS = AVATAR_SIZE / 2;
 
 const Avatar = styled.Image`

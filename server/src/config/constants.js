@@ -3,4 +3,5 @@ export default {
   DB_URL: 'mongodb://root:dev@ds213199.mlab.com:13199/twitt',
   GRAPHQL_PATH: '/graphql',
   JWT_SECRET: 'secretforjwt',
+  SUBSCRIPTION_PATH: 'ws://localhost:3000/subscriptions',
 };

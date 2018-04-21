@@ -18,9 +18,11 @@
     "faker": "^4.1.0",
     "graphql": "^0.13.1",
     "graphql-date": "^1.0.3",
+    "graphql-subscriptions": "^0.5.8",
     "graphql-tools": "^2.22.0",
     "jsonwebtoken": "^8.2.0",
-    "mongoose": "^5.0.10"
+    "mongoose": "^5.0.10",
+    "subscriptions-transport-ws": "^0.9.8"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

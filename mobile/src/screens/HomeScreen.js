@@ -9,6 +9,8 @@ import FeedCard from '../components/FeedCard/FeedCard';
 
 import GET_TWEETS_QUERY from '../graphql/queries/getTweets';
 import ME_QUERY from '../graphql/queries/me';
+import TWEET_ADDED_SUBSCRIPTION from '../graphql/subscriptions/tweetAdded';
+
 import { getUserInfo } from '../actions/user';
 
 const Root = styled.View`
@@ -21,6 +23,26 @@ class HomeScreen extends Component {
     data: PropTypes.object.isRequired,
     getUserInfo: PropTypes.func.isRequired,
   };
+
+  componentWillMount() {
+    this.props.data.subscribeToMore({
+      document: TWEET_ADDED_SUBSCRIPTION,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData) {
+          return prev;
+        }
+
+        const newTweet = subscriptionData.data.tweetAdded;
+
+        if (!prev.getTweets.find(t => t._id === newTweet._id)) {
+          return {
+            ...prev,
+            getTweets: [{ ...newTweet }, ...prev.getTweets],
+          };
+        }
+      },
+    });
+  }
 
   componentDidMount() {
     this._getUserInfo();

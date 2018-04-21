@@ -3,11 +3,19 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import thunk from 'redux-thunk';
+import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws';
 
 import reducers from './reducers';
 
+const BACKEND_URL = '192.168.0.104:3000';
+
 const networkInterface = createNetworkInterface({
-  uri: 'http://192.168.0.104:3000/graphql',
+  uri: `http://${BACKEND_URL}/graphql`,
+});
+
+const wsClient = new SubscriptionClient(`ws://${BACKEND_URL}/subscriptions`, {
+  reconnect: true,
+  connectionParams: {},
 });
 
 networkInterface.use([
@@ -31,8 +39,10 @@ networkInterface.use([
   },
 ]);
 
+const networkInterfaceWithSubs = addGraphQLSubscriptions(networkInterface, wsClient);
+
 export const client = new ApolloClient({
-  networkInterface,
+  networkInterface: networkInterfaceWithSubs,
 });
 
 const middlewares = [client.middleware(), thunk];

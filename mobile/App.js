@@ -31,6 +31,7 @@ export default class App extends React.Component {
         store.dispatch(login());
       }
     } catch (error) {
+      await AsyncStorage.removeItem('@twitt');
       throw error;
     }
 

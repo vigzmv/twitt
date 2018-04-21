@@ -137,9 +137,9 @@ function AppNavigator(props) {
     addListener,
   });
 
-  // if (!props.user.isAuthenticated) {
-  //   return <AuthScreen />;
-  // }
+  if (!props.user.isAuthenticated) {
+    return <AuthScreen />;
+  }
 
   return <AppMainNav navigation={navigation} />;
 }

@@ -24,24 +24,22 @@ const ButtonText = styled.Text`
   color: ${props => props.theme.GREY};
 `;
 
-const isFav = false;
-
-function FeedCardBottom({ favoriteCount, onFavoritePress }) {
+function FeedCardBottom({ favoriteCount, onFavoritePress, isFavorite }) {
   return (
     <Root>
       <Button>
         <FontAwesome name="comment-o" size={22} color={colors.GREY} />
-        <ButtonText>3</ButtonText>
+        <ButtonText>{Math.floor(Math.random() * 8)}</ButtonText>
       </Button>
       <Button>
         <MaterialCommunityIcons name="twitter-retweet" size={32} color={colors.GREY} />
-        <ButtonText>4</ButtonText>
+        <ButtonText>{Math.floor(Math.random() * 8)}</ButtonText>
       </Button>
       <Button onPress={onFavoritePress}>
-        <Ionicons
-          name={isFav ? 'md-heart' : 'md-heart-outline'}
-          size={24}
-          color={isFav ? colors.RED : colors.GREY}
+        <MaterialCommunityIcons
+          name={isFavorite ? 'heart' : 'heart-outline'}
+          size={23}
+          color={isFavorite ? colors.PRIMARY_LIGHT : colors.GREY}
         />
         <ButtonText>{favoriteCount}</ButtonText>
       </Button>
@@ -51,6 +49,12 @@ function FeedCardBottom({ favoriteCount, onFavoritePress }) {
 
 FeedCardBottom.propTypes = {
   favoriteCount: PropTypes.number.isRequired,
+  onFavoritePress: PropTypes.func.isRequired,
+  isFavorite: PropTypes.bool,
+};
+
+FeedCardBottom.defaultProps = {
+  isFavorite: false,
 };
 
 export default FeedCardBottom;

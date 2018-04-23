@@ -19,8 +19,28 @@ export default {
   getTweets: async (_, __, { user }) => {
     try {
       await requireAuth(user);
+      const p1 = Tweet.find().sort({ createdAt: -1 });
+      const p2 = FavoriteTweet.findOne({ userId: user._id });
+      const [tweets, favorites] = await Promise.all([p1, p2]);
 
-      return Tweet.find().sort({ createdAt: -1 });
+      const resTweets = tweets.reduce((arr, tweet) => {
+        const tw = tweet.toJSON();
+
+        if (favorites.tweets.some(t => t.equals(tweet._id))) {
+          arr.push({
+            ...tw,
+            isFavorite: true,
+          });
+        }
+        arr.push({
+          ...tw,
+          isFavorite: false,
+        });
+
+        return arr;
+      }, []);
+
+      return resTweets;
     } catch (error) {
       throw error;
     }
@@ -43,7 +63,10 @@ export default {
       const tweet = await Tweet.create({ ...args, user: user._id });
       pubsub.publish(TWEET_ADDED, { [TWEET_ADDED]: tweet });
 
-      return tweet;
+      return {
+        ...tweet.toJSON(),
+        isFavorite: false,
+      };
     } catch (error) {
       throw error;
     }

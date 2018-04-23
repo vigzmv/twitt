@@ -31,14 +31,18 @@ const CardContentText = styled.Text`
   color: ${props => props.theme.BLACK_LIGHT};
 `;
 
-function FeedCard({ text, user, createdAt, favoriteCount, favorite }) {
+function FeedCard({ text, user, createdAt, favoriteCount, isFavorite, favorite }) {
   return (
     <Root>
       <FeedCardHeader {...user} createdAt={createdAt} />
       <CardContentContainer>
         <CardContentText>{text}</CardContentText>
       </CardContentContainer>
-      <FeedCardBottom favoriteCount={favoriteCount} onFavoritePress={favorite} />
+      <FeedCardBottom
+        favoriteCount={favoriteCount}
+        isFavorite={isFavorite}
+        onFavoritePress={favorite}
+      />
     </Root>
   );
 }
@@ -53,7 +57,12 @@ FeedCard.propTypes = {
   }).isRequired,
   createdAt: PropTypes.string.isRequired,
   favoriteCount: PropTypes.number.isRequired,
+  isFavorite: PropTypes.bool,
   favorite: PropTypes.func.isRequired,
+};
+
+FeedCard.defaultProps = {
+  isFavorite: false,
 };
 
 export default graphql(FAVORITE_TWEET_MUTATION, {

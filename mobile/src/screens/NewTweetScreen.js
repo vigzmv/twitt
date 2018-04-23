@@ -34,7 +34,7 @@ const Input = styled.TextInput.attrs({
 })`
   height: 40%;
   width: 100%;
-  font-size: 21;
+  font-size: 20;
   color: ${props => props.theme.SECONDARY};
 `;
 
@@ -96,6 +96,7 @@ class NewTweetScreen extends Component {
           _id: Math.random(Math.random * -10000000),
           text: this.state.text,
           favoriteCount: 0,
+          isFavorite: false,
           createdAt: new Date(),
           user: {
             __typename: 'User',

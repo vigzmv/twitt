@@ -17,27 +17,27 @@ const FavoriteTweetSchema = new Schema({
 
 FavoriteTweetSchema.index({ userId: 1 }, { unique: true });
 
-FavoriteTweetSchema.method = {
-  async userFavoritedTweet(tweetId) {
+FavoriteTweetSchema.methods = {
+  async userFavoriteTweet(tweetId) {
     if (this.tweets.some(t => t.equals(tweetId))) {
       this.tweets.pull(tweetId);
 
       await this.save();
-      const tweet = Tweet.decFavoriteCount(tweetId);
+      const tweet = await Tweet.decFavoriteCount(tweetId);
 
       return {
         isFavorite: false,
-        ...tweet.toJson(),
+        ...tweet.toJSON(),
       };
     }
     this.tweets.push(tweetId);
     await this.save();
 
-    const tweet = Tweet.incFavoriteCount(tweetId);
+    const tweet = await Tweet.incFavoriteCount(tweetId);
 
     return {
       isFavorite: true,
-      ...tweet.toJson(),
+      ...tweet.toJSON(),
     };
   },
 };

@@ -92,7 +92,7 @@ export default {
       await requireAuth(user);
       const favorites = await FavoriteTweet.findOne({ userId: user._id });
 
-      return favorites.userFavoritedTweet(_id);
+      return favorites.userFavoriteTweet(_id);
     } catch (error) {
       throw error;
     }

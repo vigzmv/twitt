@@ -1,5 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 import Tweet from './Tweet';
+import { TWEET_FAVORITED } from '../graphql/resolvers/tweet-resolver';
+import { pubsub } from '../config/pubsub';
 
 const FavoriteTweetSchema = new Schema({
   userId: {
@@ -23,21 +25,23 @@ FavoriteTweetSchema.methods = {
       this.tweets.pull(tweetId);
 
       await this.save();
-      const tweet = await Tweet.decFavoriteCount(tweetId);
+      const tweet = (await Tweet.decFavoriteCount(tweetId)).toJSON();
 
+      pubsub.publish(TWEET_FAVORITED, { [TWEET_FAVORITED]: { ...tweet } });
       return {
         isFavorite: false,
-        ...tweet.toJSON(),
+        ...tweet,
       };
     }
     this.tweets.push(tweetId);
     await this.save();
 
-    const tweet = await Tweet.incFavoriteCount(tweetId);
+    const tweet = (await Tweet.incFavoriteCount(tweetId)).toJSON();
+    pubsub.publish(TWEET_FAVORITED, { [TWEET_FAVORITED]: { ...tweet } });
 
     return {
       isFavorite: true,
-      ...tweet.toJSON(),
+      ...tweet,
     };
   },
 };

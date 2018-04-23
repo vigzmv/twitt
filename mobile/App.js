@@ -7,7 +7,7 @@ import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 
 import { store, client } from './src/store';
 import { colors } from './src/utils/constants';
-import { login } from './src/actions/user';
+import { login, logout } from './src/actions/user';
 
 import AppNavigation from './src/navigations';
 
@@ -29,9 +29,10 @@ export default class App extends React.Component {
       const token = await AsyncStorage.getItem('@twitt');
       if (token != null) {
         store.dispatch(login());
+      } else {
+        store.dispatch(logout());
       }
     } catch (error) {
-      await AsyncStorage.removeItem('@twitt');
       throw error;
     }
 

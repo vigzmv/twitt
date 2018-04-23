@@ -26,7 +26,7 @@ const ButtonText = styled.Text`
 
 const isFav = false;
 
-function FeedCardBottom({ favoriteCount }) {
+function FeedCardBottom({ favoriteCount, onFavoritePress }) {
   return (
     <Root>
       <Button>
@@ -37,7 +37,7 @@ function FeedCardBottom({ favoriteCount }) {
         <MaterialCommunityIcons name="twitter-retweet" size={32} color={colors.GREY} />
         <ButtonText>4</ButtonText>
       </Button>
-      <Button>
+      <Button onPress={onFavoritePress}>
         <Ionicons
           name={isFav ? 'md-heart' : 'md-heart-outline'}
           size={24}

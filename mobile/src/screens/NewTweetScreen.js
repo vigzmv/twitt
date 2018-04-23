@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
 
+import Loading from '../components/Loading';
 import { colors } from '../utils/constants';
 import CREATE_TWEET_MUTATION from '../graphql/mutations/createTweet';
 import GET_TWEETS_QUERY from '../graphql/queries/getTweets';
@@ -67,6 +68,7 @@ const TweetLength = styled.Text`
 class NewTweetScreen extends Component {
   state = {
     text: '',
+    tweeting: false,
   };
 
   get _tweetLength() {
@@ -81,6 +83,7 @@ class NewTweetScreen extends Component {
 
   _onCreateTweet = async () => {
     const { user } = this.props;
+    this.setState({ tweeting: true });
 
     await this.props.mutate({
       variables: {
@@ -116,6 +119,7 @@ class NewTweetScreen extends Component {
 
     Keyboard.dismiss();
     this.props.navigation.goBack(null);
+    this.setState({ tweeting: false });
   };
 
   render() {
@@ -125,7 +129,11 @@ class NewTweetScreen extends Component {
           <Input value={this.state.text} onChangeText={this._onChange} />
           <TweetLength>{this._tweetLength}</TweetLength>
           <TweetButton disabled={this._buttonDisabled} onPress={this._onCreateTweet}>
-            <TweetButtonText>{`T\u200Aw\u200Ae\u200Ae\u200At`}</TweetButtonText>
+            {this.state.tweeting ? (
+              <Loading color={colors.WHITE} size={26} />
+            ) : (
+              <TweetButtonText>{`T\u200Aw\u200Ae\u200Ae\u200At`}</TweetButtonText>
+            )}
           </TweetButton>
         </Wrapper>
       </Root>

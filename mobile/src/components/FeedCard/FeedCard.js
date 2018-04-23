@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { graphql } from 'react-apollo';
+import Placeholder from 'rn-placeholder';
 
 import FeedCardHeader from './FeedCardHeader';
 import FeedCardBottom from './FeedCardBottom';
@@ -18,6 +19,16 @@ const Root = styled.View`
   shadow-opacity: 0.1;
   elevation: 2;
   margin: 4.4px 0;
+  border-radius: 2;
+`;
+
+const PlaceHolderWrapper = styled.View`
+  margin: 12px 10px;
+`;
+
+const Wrapper = styled.View`
+  flex: 1;
+  margin-top: 2;
 `;
 
 const CardContentContainer = styled.View`
@@ -31,7 +42,34 @@ const CardContentText = styled.Text`
   color: ${props => props.theme.BLACK_LIGHT};
 `;
 
-function FeedCard({ text, user, createdAt, favoriteCount, isFavorite, favorite }) {
+function FeedCard({
+  text,
+  user,
+  createdAt,
+  favoriteCount,
+  isFavorite,
+  favorite,
+  placeholder,
+  isLoaded,
+}) {
+  if (placeholder) {
+    return (
+      <Root>
+        <PlaceHolderWrapper>
+          <Placeholder.ImageContent
+            onReady={!isLoaded}
+            lineNumber={2}
+            animate="shine"
+            width="94%"
+            lastLineWidth="40%"
+            size={48}
+          >
+            <Wrapper />
+          </Placeholder.ImageContent>
+        </PlaceHolderWrapper>
+      </Root>
+    );
+  }
   return (
     <Root>
       <FeedCardHeader {...user} createdAt={createdAt} />
@@ -47,19 +85,19 @@ function FeedCard({ text, user, createdAt, favoriteCount, isFavorite, favorite }
   );
 }
 
-FeedCard.propTypes = {
-  text: PropTypes.string.isRequired,
-  user: PropTypes.shape({
-    avatar: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string.isRequired,
-  }).isRequired,
-  createdAt: PropTypes.string.isRequired,
-  favoriteCount: PropTypes.number.isRequired,
-  isFavorite: PropTypes.bool,
-  favorite: PropTypes.func.isRequired,
-};
+// FeedCard.propTypes = {
+//   text: PropTypes.string.isRequired,
+//   user: PropTypes.shape({
+//     avatar: PropTypes.string.isRequired,
+//     username: PropTypes.string.isRequired,
+//     firstName: PropTypes.string.isRequired,
+//     lastName: PropTypes.string.isRequired,
+//   }).isRequired,
+//   createdAt: PropTypes.string.isRequired,
+//   favoriteCount: PropTypes.number.isRequired,
+//   isFavorite: PropTypes.bool,
+//   favorite: PropTypes.func.isRequired,
+// };
 
 FeedCard.defaultProps = {
   isFavorite: false,

@@ -76,13 +76,22 @@ class HomeScreen extends Component {
 
   _renderListItem = ({ item }) => <FeedCard {...item} />;
 
+  _renderPlaceholder = ({ item }) => (
+    <FeedCard placeholder key={item} isLoaded={this.props.data.loading} />
+  );
+
   render() {
     const { data } = this.props;
 
     if (data.loading) {
       return (
         <Root>
-          <ActivityIndicator size="large" />
+          <FlatList
+            contentContainerStyle={{ alignSelf: 'stretch' }}
+            data={[1, 2, 3, 4, 5]}
+            renderItem={this._renderPlaceholder}
+            keyExtractor={item => item}
+          />
         </Root>
       );
     }
@@ -91,7 +100,9 @@ class HomeScreen extends Component {
       <Root>
         <FlatList
           contentContainerStyle={{ alignSelf: 'stretch' }}
-          data={data.getTweets}
+          data={data.getTweets.filter(
+            (obj, pos, arr) => arr.map(mapObj => mapObj._id).indexOf(obj._id) === pos,
+          )}
           keyExtractor={item => item._id}
           renderItem={this._renderListItem}
         />

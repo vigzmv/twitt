@@ -7,7 +7,7 @@ import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-trans
 
 import reducers from './reducers';
 
-const BACKEND_URL = '192.168.0.104:3000';
+const BACKEND_URL = '192.168.0.103:3000';
 
 const networkInterface = createNetworkInterface({
   uri: `http://${BACKEND_URL}/graphql`,

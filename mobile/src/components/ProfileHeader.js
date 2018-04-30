@@ -4,8 +4,9 @@ import styled from 'styled-components/native';
 const Root = styled.View`
   height: 170;
   align-self: stretch;
-  padding-top: 40;
+  padding-top: 26;
   background-color: ${props => props.theme.WHITE};
+  elevation: 4;
 `;
 
 const Heading = styled.View`
@@ -18,9 +19,9 @@ const Heading = styled.View`
 `;
 
 const Avatar = styled.Image`
-  height: 70;
-  width: 70;
-  border-radius: 35;
+  height: 75;
+  width: 75;
+  border-radius: 40;
   margin-right: 6;
 `;
 
@@ -28,24 +29,24 @@ const UsernameContainer = styled.View`
   flex: 1;
   align-self: stretch;
   padding-left: 12;
-  padding-top: 9;
+  padding-top: 16;
 `;
 
 const Fullname = styled.Text`
   color: ${props => props.theme.SECONDARY};
   font-weight: bold;
-  font-size: 21;
+  font-size: 22;
 `;
 
 const Username = styled.Text`
   color: ${props => props.theme.SECONDARY};
   /* font-weight: bold; */
-  font-size: 17;
-  opacity: 0.78;
+  font-size: 19;
+  opacity: 0.7;
 `;
 
 const MetaContainer = styled.View`
-  flex: 0.8;
+  flex: 0.7;
   flex-direction: row;
 `;
 
@@ -57,7 +58,7 @@ const MetaBox = styled.View`
 
 const MetaText = styled.Text`
   color: ${props => props.theme.SECONDARY};
-  font-size: 18;
+  font-size: 19;
   font-weight: 600;
   opacity: 0.8;
 `;

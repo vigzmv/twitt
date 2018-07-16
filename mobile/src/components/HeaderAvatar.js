@@ -55,7 +55,7 @@ class HeaderAvatar extends Component {
       <ButtonHeader side="left" onPress={this._onOpenActionSheet}>
         <Avatar
           source={{
-            uri: info.avatar || 'https://avatars1.githubusercontent.com/u/22526593?s=460&v=4',
+            uri: info.avatar,
           }}
         />
       </ButtonHeader>

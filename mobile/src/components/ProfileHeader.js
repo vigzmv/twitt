@@ -72,9 +72,7 @@ export default function({ firstName, lastName, avatar, username }) {
   return (
     <Root>
       <Heading>
-        <Avatar
-          source={{ uri: avatar || 'https://avatars1.githubusercontent.com/u/22526593?s=460&v=4' }}
-        />
+        <Avatar source={{ uri: avatar }} />
         <UsernameContainer>
           <Fullname>
             {firstName} {lastName}

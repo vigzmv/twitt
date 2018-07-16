@@ -72,9 +72,7 @@ function FeedCardHeader({ avatar, username, firstName, lastName, createdAt }) {
   return (
     <Root>
       <AvatarContainer>
-        <Avatar
-          source={{ uri: avatar || 'https://avatars1.githubusercontent.com/u/22526593?s=460&v=4' }}
-        />
+        <Avatar source={{ uri: avatar }} />
       </AvatarContainer>
       <MetaContainer>
         <MetaTopContainer>
